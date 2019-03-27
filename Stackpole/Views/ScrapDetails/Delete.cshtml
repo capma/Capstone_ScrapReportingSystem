@@ -1,0 +1,80 @@
+﻿@model Stackpole.Models.ScrapDetail
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ScrapDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.machineId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.machineId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.employeeNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employeeNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScrapReason.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScrapReason.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Scrap.partId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Scrap.partId)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        @Html.ActionLink("Back to list", null, null, null, new { href = Request.UrlReferrer })
+    </div>
+    }
+</div>

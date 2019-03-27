@@ -1,0 +1,3 @@
+﻿$(function () {
+    $("#department-list").DataTable();
+})

@@ -1,0 +1,74 @@
+﻿@model Stackpole.Models.ScrapDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ScrapDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.machineID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.machineID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.employeeNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employeeNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScrapReason.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScrapReason.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Scrap.partId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Scrap.partId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

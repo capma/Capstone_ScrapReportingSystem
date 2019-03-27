@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Stackpole.ViewModels.Operations>
+
+@{
+    ViewBag.Title = "Operation";
+}
+
+<div class="row col-md-12">
+    <div class="col-md-5">
+        <h2>@ViewBag.plantName | @ViewBag.departmentName | @ViewBag.partId</h2>
+    </div>
+    <div class="col-md-2">
+        <h2>
+            @Html.ActionLink("Go Back", "Index", "PartDepartments",
+                    new {
+                        plantId = ViewBag.plantId,
+                        plantName = ViewBag.plantName,
+                        departmentName = ViewBag.departmentName,
+                        sequence = ViewBag.sequence
+                    }, 
+                    new { @class = "btn btn-primary btn-go-back" })
+        </h2>
+    </div>
+    <div class="col-md-5">
+    </div>
+</div>
+
+<div class="center-list">
+    <table>
+        <tr>
+            <th>Operation name</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <button type="button"
+                            class="btn btn-primary link"
+                            data-plantname="@ViewBag.plantName"
+                            data-departmentname="@ViewBag.departmentName"
+                            data-partid="@ViewBag.partId"
+                            data-operationname="@item.operationName"
+                            data-operationid="@item.operationId"
+                            data-weight="@ViewBag.weight"
+                            data-cost="@ViewBag.cost">
+                        @item.operationName
+                    </button>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Confirm Selection</h4>
+            </div>
+
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+    
+@section scripts {
+    <script type="text/javascript" src="~/Scripts/Stackpole/operation.js"></script>
+}

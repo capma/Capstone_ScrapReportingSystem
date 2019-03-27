@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Stackpole.Models.Plant>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>SCRAP REPORTING SYSTEM</h1>
+    <p class="lead">Any time you find a stray part in your area with no scrap reason identified for it; </p>
+    <p class="lead">scap it under reason "5S"</p>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            @Html.ActionLink(item.name, "Index", "Departments", new { plantId = item.id, plantName = item.name }, new { @class = "btn btn-primary btn-lg btn-plants" })
+        </div>
+    }
+</div>

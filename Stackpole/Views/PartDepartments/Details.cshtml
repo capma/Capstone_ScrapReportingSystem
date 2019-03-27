@@ -1,0 +1,74 @@
+﻿@model Stackpole.Models.PartDepartment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PartDepartment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.sequence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sequence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.weightlbs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.weightlbs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Department.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Part.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Part.description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

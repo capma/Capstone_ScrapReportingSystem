@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Stackpole.Models.Plant>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+<p>
+    @Html.ActionLink("Create Plant", "Create", null, new { @class="btn btn-primary", style="margin-top: 10px;"})
+</p>
+<table class="table-striped" id="plant-list">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.area)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.name, "Edit", new { id = item.id })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.area)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class="btn btn-primary btn-sm" })
+                    @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class="btn btn-success btn-sm" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class="btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="~/Scripts/Stackpole/plant.js"></script>
+}

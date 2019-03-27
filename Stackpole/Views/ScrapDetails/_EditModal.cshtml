@@ -1,0 +1,109 @@
+﻿@model Stackpole.Models.ScrapDetail
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Edit scrap</h4>
+</div>
+
+@*@using (Ajax.BeginForm("Edit", "ScrapDetails",
+    new { operationId = @ViewBag.operationId, id = "frm-edit-scrap" },
+    new AjaxOptions { OnSuccess = "closePopUp" }))*@
+@*@using (Html.BeginForm("Edit", "ScrapDetails", new { operationId = @ViewBag.operationId, id = "frm-edit-scrap" }, FormMethod.Post, null ))*@
+@using (Html.BeginForm("Edit", "ScrapDetails", new { operationId = @ViewBag.operationId }, FormMethod.Post, new { id = "frm-edit-scrap" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-body">
+        <div class="form-horizontal">
+            <p style="background-color: yellow; font-size: 20px;">Anytime you find a stray part in your area with no scrap reason identified for it; scrap it under scrap reason “5S”.</p>
+            <div class="row">
+                <div class="column">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.id)
+                    @Html.HiddenFor(model => model.scrapId)
+
+                    @*@Html.Hidden("scrapDetailModal_weight", ViewBag.unitWeight)
+                        @Html.Hidden("scrapDetailModal_quantity", ViewBag.unitCost)*@
+
+                    <input id="scrapModal_unitWeight" name="scrapModal_unitWeight" type="hidden" value="@ViewBag.unitWeight">
+                    <input id="scrapModal_unitCost" name="scrapModal_unitCost" type="hidden" value="@ViewBag.unitCost">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.machineId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("machineId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.machineId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.reasonId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("reasonId", null, htmlAttributes: new { @class = "form-control", @onchange = "selectReason(this.value)" })
+                            @Html.ValidationMessageFor(model => model.reasonId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.quantity, new { htmlAttributes = new { @class = "form-control quantity" } })
+                            @Html.ValidationMessageFor(model => model.quantity, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.weight, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.weight, new { htmlAttributes = new { @class = "form-control weight" } })
+                            @Html.ValidationMessageFor(model => model.weight, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.cost, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.cost, new { htmlAttributes = new { @class = "form-control cost" } })
+                            @Html.ValidationMessageFor(model => model.cost, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.employeeNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.employeeNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.employeeNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column-numpad">
+                    <p>Use the "ON SCREEN KEY PAD" to enter the scrap amount. Use the "RESET" key to correct any errors.</p>
+                    <div class="row row-numpad">
+                        <input type="button" class="col-md-4 btn-num btn-7" onclick="tapNum(this.value)" value="7">
+                        <input type="button" class="col-md-4 btn-num btn-8" onclick="tapNum(this.value)" value="8">
+                        <input type="button" class="col-md-4 btn-num btn-9" onclick="tapNum(this.value)" value="9">
+
+                        <input type="button" class="col-md-4 btn-num btn-4" onclick="tapNum(this.value)" value="4">
+                        <input type="button" class="col-md-4 btn-num btn-5" onclick="tapNum(this.value)" value="5">
+                        <input type="button" class="col-md-4 btn-num btn-6" onclick="tapNum(this.value)" value="6">
+
+                        <input type="button" class="col-md-4 btn-num btn-1" onclick="tapNum(this.value)" value="1">
+                        <input type="button" class="col-md-4 btn-num btn-2" onclick="tapNum(this.value)" value="2">
+                        <input type="button" class="col-md-4 btn-num btn-3" onclick="tapNum(this.value)" value="3">
+
+                        <input type="button" class="col-md-4 btn-num btn-0" onclick="tapNum(this.value)" value="0">
+                        <input type="button" class="col-md-8 btn-num btn-reset" onclick="tapNum(this.value)" value="Reset">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <input type="submit" value="Save" class="btn btn-default btn-save-scrap" />
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Back to List</button>
+    </div>
+}

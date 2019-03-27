@@ -1,0 +1,29 @@
+﻿<h2>@ViewBag.title</h2>
+
+<p data-bind="text: MessageToClient"></p>
+
+<form id="edit-plant">
+    <div>
+        <div class="form-group">
+            <label class="control-label" for="name">Name</label>
+            <input class="form-control" name="name" id="name" data-bind="value: name, event: {change: flagPlantAsEdited}">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="description">Description</label>
+            <input class="form-control" name="description" id="description" data-bind="value: description, event: {change: flagPlantAsEdited}">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="area">Area</label>
+            <input class="form-control" name="area" id="area" data-bind="value: area, event: {change: flagPlantAsEdited}">
+        </div>
+    </div>
+
+    <p>@*<button data-bind="click: save" type="submit" class="btn btn-primary">Save</button>*@</p>
+    <p><button type="submit" class="btn btn-primary">Save</button></p>
+
+    <div>
+        <a href="/Plants/Index/" class="btn btn-default">&laquo; Back to List</a>
+    </div>
+</form>
+
+

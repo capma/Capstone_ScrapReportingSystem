@@ -1,0 +1,3 @@
+﻿$(function () {
+    $("#plant-list").DataTable();
+})

@@ -1,0 +1,24 @@
+﻿@model Stackpole.ViewModels.PlantViewModel
+@using System.Web.Script.Serialization
+
+@{
+    ViewBag.Title = "Create Plant";
+    string data = new JavaScriptSerializer().Serialize(Model);
+    var viewBagListParts = new JavaScriptSerializer().Serialize(ViewBag.listParts);
+}
+
+
+@section scripts {
+    <script src="~/Scripts/knockout-3.5.0.js"></script>
+    <script src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery-validate.bootstrap-tooltip.js"></script>
+    <script src="~/Scripts/Stackpole/plantViewModel.js"></script>
+    <script type="text/javascript">
+        var plantViewModel = new plantViewModel(@Html.Raw(data));
+        plantViewModel.listParts = ko.observableArray([]);
+        ko.applyBindings(plantViewModel);
+    </script>
+}
+
+@Html.Partial("~/Views/Shared/Plant/_EditPlant.cshtml")

@@ -1,0 +1,73 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.btn-go-back {
+    background-color: #FF5E00;
+}
+
+.center-list {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
+
+.modal-header {
+    padding: 9px 15px;
+    border-bottom: 1px solid #eee;
+    background-color: #0480be;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: white;
+}
+
+th {
+    background-color: #DCDCDC;
+}
+
+.tooltip-inner {
+    background-color: #d9534f;
+}
+
+.top.tooltip .tooltip-arrow {
+    border-top-color: #d43f3a;
+}
+
+.right.tooltip .tooltip-arrow {
+    border-right-color: #d43f3a;
+}
+
+input:focus {
+    background-color: yellow;
+}
+
+/*select::after focus {
+    background-color: yellow;
+}*/

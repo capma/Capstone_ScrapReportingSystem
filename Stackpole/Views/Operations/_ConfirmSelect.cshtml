@@ -1,0 +1,32 @@
+﻿
+<div class="modal-body">
+    <div class="col-md-12" style="text-align: center">
+        <h2>@ViewBag.partId</h2>
+        <h2>@ViewBag.departmentName</h2>
+        <h2>@ViewBag.operationName</h2>
+    </div>
+
+    <div class="col-md-12" style="text-align: center; background-color: #BA1419; color: #FFF200;">
+        <h3>
+            Please review your selection.
+            This is the last chance to make changes or corrections
+        </h3>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" style="background-color: #F61D25" class="btn btn-primary" data-dismiss="modal">Need to change/correct</button>
+
+    @*@Html.ActionLink("This is correct", "Index", "ScrapDetails",*@
+    @Html.ActionLink("This is correct", "IndexForUpdate", "ScrapDetails",
+        new {
+            plantName = ViewBag.plantName,
+            departmentName = ViewBag.departmentName,
+            partId = ViewBag.partId,
+            operationName = ViewBag.operationName,
+            operationId = ViewBag.operationId,
+            weight = ViewBag.weight,
+            cost = ViewBag.cost
+        },
+        new { @class = "btn btn-primary", style= "background-color: #A1BE6E" })
+</div>

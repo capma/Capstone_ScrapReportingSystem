@@ -1,0 +1,155 @@
+﻿@model Stackpole.ViewModels.ScrapsViewModel
+
+@Styles.Render("~/Content/scrap")
+
+@{
+    ViewBag.Title = "Scrap Details";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">@ViewBag.partId</a></li>
+        <li class="breadcrumb-item"><a href="#">@ViewBag.departmentName</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@ViewBag.operationName</li>
+    </ol>
+</nav>
+
+<h2>@((DateTime)ViewBag.date)</h2>
+
+<h4>Unit cost:      @ViewBag.unitCost</h4>
+<h4>Unit weight:    @ViewBag.unitWeight</h4>
+
+@*DON'T DELETE THIS - THIS IS ANOTHER TECHNIQUE TO PASS DATA TO VIEW*@
+@*<p>
+        @using (Html.BeginForm("CreateNewScrap", "ScrapDetails", FormMethod.Post))
+        {
+            @Html.HiddenFor(m => m.scrap.plantId, new { @Value = ViewBag.plantName })
+            @Html.HiddenFor(m => m.scrap.departmentId, new { @Value = ViewBag.departmentName })
+            @Html.HiddenFor(m => m.scrap.operationId, new { @Value = ViewBag.operationName })
+            @Html.HiddenFor(m => m.operationIdInt, new { @Value = ViewBag.operationId })
+            @Html.HiddenFor(m => m.scrap.partId, new { @Value = ViewBag.partId })
+            @Html.HiddenFor(m => m.scrap.unitCost, new { @Value = ViewBag.unitCost })
+            @Html.HiddenFor(m => m.scrap.unitWeight, new { @Value = ViewBag.unitWeight })
+            @Html.HiddenFor(m => m.scrap.date, new { @Value = ViewBag.date })
+
+            @Html.HiddenFor(m => m.scrap.machineId, new { @Value = ViewBag.machineId })
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create New Scrap" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </p>*@
+
+    <button type="button"
+            class="btn btn-primary btn-add-scrap"
+            data-date="@ViewBag.date"
+            data-operationId="@ViewBag.operationId"
+            data-operationName="@ViewBag.operationName"
+            data-partId="@ViewBag.partId"
+            data-plantId="@ViewBag.plantName"
+            data-unitCost="@ViewBag.unitCost"
+            data-unitWeight="@ViewBag.unitWeight"
+            data-departmentId="@ViewBag.departmentName"
+            data-scrapid="@ViewBag.scrapId">
+        Add scrap
+    </button>
+
+    @Html.ActionLink("Finished with This Part", "Index", "Home", null, new { @class = "btn btn-primary", style= "background-color: #688632;" })
+
+    @*@Html.ActionLink("Cancel Entry", "Edit", new { })*@
+    <button type="button"
+            class="btn btn-primary btn-cancel-entry"
+            data-scrapid="@ViewBag.scrapId"
+            data-operationid="@ViewBag.operationId">
+        Cancel Entry
+    </button>
+
+<table class="table">
+    <tr>
+        <th>
+            Machine
+        </th>
+        <th>
+            Scrap Reason
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Value
+        </th>
+        <th>
+            Weight
+        </th>
+        <th>
+            Employee #
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model != null && Model.scrapDetails != null)
+    {
+        foreach (var item in Model.scrapDetails)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.machineId)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.ScrapReason.description)*@
+                    @Html.DisplayFor(modelItem => item.reasonId)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.weight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.employeeNumber)
+                </td>
+
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { scrapId = item.scrapId, operationId = ViewBag.operationId, r = Request.Url.ToString() }) |*@
+                    <button type="button"
+                            class="btn btn-info btn-edit-scrap"
+                            data-scrapdetailid="@item.id"
+                            data-scrapid="@item.scrapId"
+                            data-operationid="@ViewBag.operationId"
+                            data-reasonid="@item.reasonId">
+                        Edit scrap
+                    </button> |
+                    @*@Html.ActionLink("Details", "Details", new { id = item.id }) |*@
+                    @*@Html.ActionLink("Delete", "Delete", new { scrapId = item.scrapId })*@
+                    <button type="button"
+                            class="btn btn-info btn-delete-scrap"
+                            data-scrapdetailid="@item.id"
+                            data-operationid="@ViewBag.operationId">
+                        Delete
+                    </button>
+
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="/scripts/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="/scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/Scripts/Stackpole/scrap.js"></script>
+    <script type="text/javascript" src="~/Scripts/Stackpole/scrapDetail.js"></script>
+}

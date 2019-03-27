@@ -1,0 +1,50 @@
+﻿#myModal {
+    /*overflow: hidden;*/
+}
+
+#myModal .form-field {
+    /*margin-bottom: 10px;*/
+}
+
+.modal-dialog {
+    width: 800px;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    margin-left: 30px;
+}
+
+.column-numpad {
+    float: left;
+    width: 40%;
+}
+
+.row-numpad {
+    margin-left: 30px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.btn-num {
+    color: #ffffff;
+    background-color: #428bca;
+    border-color: #357ebd;
+    text-align: center;
+    padding: 1px;
+    margin: 1px;
+    width: 90px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+}
+
+.btn-reset {
+    width: 182px;
+}

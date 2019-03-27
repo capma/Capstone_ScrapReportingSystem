@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Stackpole.Models.Scrap>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+<p>
+    @Html.ActionLink("Create Scrap", "Create", null, new { @class="btn btn-primary", style="margin-top: 10px;"})
+</p>
+<table class="table-striped" id="scrap-list">
+    <thead>
+        <tr>
+            <th>
+                Date
+            </th>
+            <th>
+                Plant
+            </th>
+            <th>
+                Department
+            </th>
+            <th>
+                Part
+            </th>
+            <th>
+                Operation
+            </th>
+            <th>
+                Machine
+            </th>
+            <th>
+                Value
+            </th>
+            <th>
+                Weight
+            </th>
+            <th>
+                Cancelled
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.plantId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.departmentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.partId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.operationId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.machineId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.unitCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.unitWeight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cancelled)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-primary btn-sm" })
+                    @*@Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-success btn-sm" })*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script>
+        $(function () {
+            $("#scrap-list").DataTable({
+                "order": [[0, "desc"]]
+            });
+        })
+    </script>
+}

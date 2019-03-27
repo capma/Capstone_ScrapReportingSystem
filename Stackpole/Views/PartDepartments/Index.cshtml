@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Stackpole.ViewModels.PartCodes>
+
+@Styles.Render("~/Content/partdepartment")
+
+@{
+    ViewBag.Title = "Part Department";
+}
+
+<div class="row col-md-12">
+    <div class="col-md-3">
+        <h3>@ViewBag.plantName | @ViewBag.departmentName</h3>
+    </div>
+    <div class="col-md-2" style="line-height: 70px;">
+        @Html.ActionLink("Go Back", "Index", "Departments",
+            new {
+                plantId = ViewBag.plantId,
+                plantName = ViewBag.plantName
+            }, 
+            new { @class = "btn btn-primary btn-go-back" })
+    </div>
+    <div class="col-md-7">
+    </div>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-2" style="margin-bottom: 5px;">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    @Html.ActionLink(item.partId, "Index", "Operations",
+                    new {
+                        plantId = ViewBag.plantId,
+                        plantName = ViewBag.plantname,
+                        departmentName = item.departmentName,
+                        partId = item.partId,
+                        weight = item.weight,
+                        cost = item.cost,
+                        sequence = ViewBag.sequence
+                    },
+                    new { @class = "btn btn-primary", style="width: 120px;" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+
+
+

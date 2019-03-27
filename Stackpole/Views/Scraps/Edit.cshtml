@@ -1,0 +1,48 @@
+﻿@model Stackpole.ViewModels.ScrapViewModel
+@using System.Web.Script.Serialization
+
+@{
+    ViewBag.Title = "Edit Scrap";
+    string data = new JavaScriptSerializer().Serialize(Model);
+
+    var viewBagListPlants = new JavaScriptSerializer().Serialize(ViewBag.listPlants);
+    var viewBagListDepartments = new JavaScriptSerializer().Serialize(ViewBag.listDepartments);
+    var viewBagListParts = new JavaScriptSerializer().Serialize(ViewBag.listParts);
+    var viewBagListOperations = new JavaScriptSerializer().Serialize(ViewBag.listOperations);
+    var viewBagListMachines = new JavaScriptSerializer().Serialize(ViewBag.listMachines);
+    var viewBagListScrapReasons = new JavaScriptSerializer().Serialize(ViewBag.listScrapReasons);
+
+}
+
+@section scripts {
+    <script src="~/Scripts/knockout-3.5.0.js"></script>
+    <script src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery-validate.bootstrap-tooltip.js"></script>
+    <script src="~/Scripts/moment.js"></script>
+
+    <script src="~/Scripts/bootstrap-notify.js"></script>
+
+    <script src="~/Scripts/Stackpole/scrapViewModel.js"></script>
+    <script type="text/javascript">
+        var scrapViewModel = new ScrapViewModel(@Html.Raw(data));
+
+        var listPlantsFromViewBag = @Html.Raw(viewBagListPlants);
+        var listDepartmentsFromViewBag = @Html.Raw(viewBagListDepartments);
+        var listPartsFromViewBag = @Html.Raw(viewBagListParts);
+        var listOperationsFromViewBag = @Html.Raw(viewBagListOperations);
+        var listMachinesFromViewBag = @Html.Raw(viewBagListMachines);
+        var listScrapReasonsFromViewBag = @Html.Raw(viewBagListScrapReasons);
+
+        scrapViewModel.listPlants(listPlantsFromViewBag);
+        scrapViewModel.listDepartments(listDepartmentsFromViewBag);
+        scrapViewModel.listParts(listPartsFromViewBag);
+        scrapViewModel.listOperations(listOperationsFromViewBag);
+        scrapViewModel.listMachines(listMachinesFromViewBag);
+        scrapViewModel.listScrapReasons(listScrapReasonsFromViewBag);
+
+        ko.applyBindings(scrapViewModel);
+    </script>
+}
+
+@Html.Partial("~/Views/Shared/Scrap/_EditScrap.cshtml")

@@ -1,0 +1,10 @@
+﻿.part-department-list {
+    /*overflow: hidden;
+    overflow-y: scroll;
+    height: 400px;
+    width: 20%;*/
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}

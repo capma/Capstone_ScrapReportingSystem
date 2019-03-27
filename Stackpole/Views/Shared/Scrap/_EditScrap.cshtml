@@ -1,0 +1,109 @@
+﻿
+<h2>@ViewBag.Title</h2>
+
+<form id="edit-scrap">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label class="control-label" for="plantId">Plant</label>
+                <select class="form-control" name="plantId" id="plantId" data-bind="options: listPlants, optionsText: 'Text', optionsValue: 'Value', optionsCaption: 'Select plant...', value: plantId, event: {change: fetchListDepartments}"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="departmentId">Department</label>
+                <select class="form-control" name="departmentId" id="departmentId" data-bind="options: listDepartments, optionsText: 'Text', optionsValue: 'Value', optionsCaption: 'Select department...', value: departmentId, event: {change: fetchListParts}"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="partId">Part</label>
+                <select class="form-control" name="partId" id="partId" data-bind="options: listParts, optionsText: 'Text', optionsValue: 'Value', optionsCaption: 'Select part...', value: partId, event: {change: fetchListOperations}"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="operationId">Operation</label>
+                <select class="form-control" name="operationId" id="operationId" data-bind="options: listOperations, optionsText: 'Text', optionsValue: 'Value', optionsCaption: 'Select operation...', value: operationId, event: {change: fetchListMachines}"></select>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label class="control-label">Unit Cost</label>
+                <span class="form-control" data-bind="text: unitCost" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Unit Weight</label>
+                <span class="form-control" data-bind="text: unitWeight" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Cancelled</label>
+                <input class="form-control" data-bind="value: cancelled, event: {change: flaggedAsEdited}">
+            </div>
+
+            <div class="form-group" style="display: none;">
+                <label class="control-label">Machine</label>
+                <label type="text" class="form-control" data-bind="value: machineId" />
+            </div>
+            <div class="form-group" style="display: none;">
+                <label class="control-label">Date</label>
+                <label type="text" class="form-control" data-bind="value: date" />
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Machine
+                </th>
+                <th>
+                    Scrap Reason
+                </th>
+                <th class="text-right">
+                    Quantity
+                </th>
+                <th class="text-right">
+                    Value
+                </th>
+                <th class="text-right">
+                    Weight
+                </th>
+                <th>
+                    Employee #
+                </th>
+                <th>
+                    <button data-bind="click: addScrapDetailItem" class="btn btn-info btn-xs">Add</button>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody data-bind="foreach: ScrapDetails">
+            <tr>
+                <td class="form-group">
+                    <select class="form-control" name="machineId" data-bind="attr: {'id': 'machineId_' + $index()}, options: $parent.listMachines, optionsText: 'Text', optionsValue: 'Value', optionsCaption: 'Select machine...', value: machineId, event: { change: flaggedDetailAsEdited }, hasfocus: true"></select>
+                </td>
+                <td class="form-group">
+                    <select class="form-control" name="reasonId" data-bind="attr: {'id': 'reasonId_' + $index()}, options: $parent.listScrapReasons, optionsText: 'Text', optionsValue: 'Value', optionsCaption: 'Select reason...', value: reasonId, event: { change: flaggedDetailAsEdited }"></select>
+                </td>
+                <td class="form-group"><input class="form-control input-sm text-right" name="quantity" data-bind="attr: {'id': 'quantity_' + $index(), 'readOnly': setReadonlyQuantity()}, value: quantity, event: { change: changeQuantity($parent.unitCost(), $parent.unitWeight()) }" /></td>
+                <td class="form-group"><input class="form-control input-sm text-right" name="cost" data-bind="attr: {'id': 'cost_' + $index(), 'readonly': true}, value: cost, event: { change: flaggedDetailAsEdited }" /></td>
+                <td class="form-group"><input class="form-control input-sm text-right" name="weight" data-bind="attr: {'id': 'weight_' + $index(), 'readOnly': setReadonlyWeight()}, value: weight, event: { change: changeWeight($parent.unitCost(), $parent.unitWeight()) }" /></td>
+                <td class="form-group"><input class="form-control input-sm" name="employeeNumber" data-bind="value: employeeNumber, event: { change: flaggedDetailAsEdited }" /></td>
+                <td class="form-group"><buttn class="btn btn-danger btn-xs" data-bind="click: $parent.deleteScrapDetail">Delete</buttn></td>
+            </tr>
+        </tbody>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td class="form-group"><span class="form-control text-right">Total Cost</span></td>
+            <td class="form-group"><span class="form-control text-right" data-bind="text: Total"></span></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+
+    <div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="/Scraps/Index/" class="btn btn-default">&laquo; Back to List</a>
+        <div class='notifications top-right'></div>
+        <span data-bind="text: MessageToClient"></span>
+    </div>
+</form>

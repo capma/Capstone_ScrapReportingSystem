@@ -1,0 +1,767 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Stackpole20190326094907_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Stackpole20190326094907_db.dbo.Customers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="current" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="location" Type="nvarchar" MaxLength="50" />
+          <Property Name="current" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Stackpole20190326094907_db.dbo.Departments' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="20" />
+          <Property Name="state" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Stackpole20190326094907_db.dbo.Employees' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="emailAddress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Stackpole20190326094907_db.dbo.Locations' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Stackpole20190326094907_db.dbo.Machines' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Machines">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="departmentId" />
+            <PropertyRef Name="plantId" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="departmentId" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="255" />
+          <Property Name="plantId" Type="int" Nullable="false" />
+          <Property Name="stamp" Type="nvarchar" MaxLength="16" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Stackpole20190326094907_db.dbo.OpDept' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OpDept">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="partDeptID" Type="int" />
+          <Property Name="operationID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Stackpole20190326094907_db.dbo.OperationMachines' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OperationMachines">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="operationID" />
+            <PropertyRef Name="machineID" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="operationID" Type="int" Nullable="false" />
+          <Property Name="machineID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Stackpole20190326094907_db.dbo.Operations' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Operations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="40" />
+          <Property Name="description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Stackpole20190326094907_db.dbo.OpScrapReasons' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OpScrapReasons">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="operationID" Type="int" />
+          <Property Name="scrapReasonID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Stackpole20190326094907_db.dbo.PartCustomers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PartCustomers">
+          <Key>
+            <PropertyRef Name="PartCustID" />
+            <PropertyRef Name="PartID" />
+            <PropertyRef Name="CustID" />
+          </Key>
+          <Property Name="PartCustID" Type="int" Nullable="false" />
+          <Property Name="PartID" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="CustID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Stackpole20190326094907_db.dbo.PartDepartments' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PartDepartments">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="cost" />
+            <PropertyRef Name="weightlbs" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="partID" Type="nvarchar" MaxLength="16" />
+          <Property Name="deptID" Type="int" />
+          <Property Name="sequence" Type="int" />
+          <Property Name="cost" Type="float" Nullable="false" />
+          <Property Name="weightlbs" Type="float" Nullable="false" />
+          <Property Name="area" Type="int" />
+          <Property Name="dateCost" Type="smalldatetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Stackpole20190326094907_db.dbo.Parts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Parts">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="reportScrap" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="255" />
+          <Property Name="reportScrap" Type="bit" Nullable="false" />
+          <Property Name="PlantNumber" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Stackpole20190326094907_db.dbo.PlantEmployees' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PlantEmployees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="employeeId" Type="int" />
+          <Property Name="plantId" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Stackpole20190326094907_db.dbo.Plants' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Plants">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="50" />
+          <Property Name="area" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Stackpole20190326094907_db.dbo.ScrapDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ScrapDetails">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="scrapId" />
+            <PropertyRef Name="reasonId" />
+            <PropertyRef Name="machineId" />
+            <PropertyRef Name="quantity" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="scrapId" Type="int" Nullable="false" />
+          <Property Name="reasonId" Type="int" Nullable="false" />
+          <Property Name="machineId" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="weight" Type="float" />
+          <Property Name="cost" Type="float" />
+          <Property Name="employeeNumber" Type="smallint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Stackpole20190326094907_db.dbo.ScrapReasons' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ScrapReasons">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="50" />
+          <Property Name="operationId" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Stackpole20190326094907_db.dbo.Scraps' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Scraps">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="partId" />
+            <PropertyRef Name="departmentId" />
+            <PropertyRef Name="plantId" />
+            <PropertyRef Name="operationId" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="date" Type="smalldatetime" />
+          <Property Name="partId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="departmentId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="plantId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="machineId" Type="int" />
+          <Property Name="operationId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="unitCost" Type="float" />
+          <Property Name="unitWeight" Type="float" />
+          <Property Name="cancelled" Type="nvarchar" MaxLength="5" />
+        </EntityType>
+        <EntityContainer Name="Stackpole20190326094907_dbModelStoreContainer">
+          <EntitySet Name="Customers" EntityType="Self.Customers" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Customers].[id] AS [id], 
+    [Customers].[name] AS [name], 
+    [Customers].[location] AS [location], 
+    [Customers].[current] AS [current]
+    FROM [dbo].[Customers] AS [Customers]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Departments" EntityType="Self.Departments" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Departments].[id] AS [id], 
+    [Departments].[name] AS [name], 
+    [Departments].[state] AS [state]
+    FROM [dbo].[Departments] AS [Departments]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Employees" EntityType="Self.Employees" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Employees].[id] AS [id], 
+    [Employees].[firstName] AS [firstName], 
+    [Employees].[lastName] AS [lastName], 
+    [Employees].[emailAddress] AS [emailAddress]
+    FROM [dbo].[Employees] AS [Employees]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Locations" EntityType="Self.Locations" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Locations].[id] AS [id], 
+    [Locations].[name] AS [name]
+    FROM [dbo].[Locations] AS [Locations]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Machines" EntityType="Self.Machines" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Machines].[id] AS [id], 
+    [Machines].[departmentId] AS [departmentId], 
+    [Machines].[description] AS [description], 
+    [Machines].[plantId] AS [plantId], 
+    [Machines].[stamp] AS [stamp]
+    FROM [dbo].[Machines] AS [Machines]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OpDept" EntityType="Self.OpDept" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OpDept].[id] AS [id], 
+    [OpDept].[partDeptID] AS [partDeptID], 
+    [OpDept].[operationID] AS [operationID]
+    FROM [dbo].[OpDept] AS [OpDept]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OperationMachines" EntityType="Self.OperationMachines" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OperationMachines].[id] AS [id], 
+    [OperationMachines].[operationID] AS [operationID], 
+    [OperationMachines].[machineID] AS [machineID]
+    FROM [dbo].[OperationMachines] AS [OperationMachines]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Operations" EntityType="Self.Operations" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Operations].[id] AS [id], 
+    [Operations].[name] AS [name], 
+    [Operations].[description] AS [description]
+    FROM [dbo].[Operations] AS [Operations]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OpScrapReasons" EntityType="Self.OpScrapReasons" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OpScrapReasons].[id] AS [id], 
+    [OpScrapReasons].[operationID] AS [operationID], 
+    [OpScrapReasons].[scrapReasonID] AS [scrapReasonID]
+    FROM [dbo].[OpScrapReasons] AS [OpScrapReasons]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PartCustomers" EntityType="Self.PartCustomers" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PartCustomers].[PartCustID] AS [PartCustID], 
+    [PartCustomers].[PartID] AS [PartID], 
+    [PartCustomers].[CustID] AS [CustID]
+    FROM [dbo].[PartCustomers] AS [PartCustomers]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PartDepartments" EntityType="Self.PartDepartments" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PartDepartments].[id] AS [id], 
+    [PartDepartments].[partID] AS [partID], 
+    [PartDepartments].[deptID] AS [deptID], 
+    [PartDepartments].[sequence] AS [sequence], 
+    [PartDepartments].[cost] AS [cost], 
+    [PartDepartments].[weightlbs] AS [weightlbs], 
+    [PartDepartments].[area] AS [area], 
+    [PartDepartments].[dateCost] AS [dateCost]
+    FROM [dbo].[PartDepartments] AS [PartDepartments]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Parts" EntityType="Self.Parts" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Parts].[id] AS [id], 
+    [Parts].[description] AS [description], 
+    [Parts].[reportScrap] AS [reportScrap], 
+    [Parts].[PlantNumber] AS [PlantNumber]
+    FROM [dbo].[Parts] AS [Parts]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PlantEmployees" EntityType="Self.PlantEmployees" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PlantEmployees].[id] AS [id], 
+    [PlantEmployees].[employeeId] AS [employeeId], 
+    [PlantEmployees].[plantId] AS [plantId]
+    FROM [dbo].[PlantEmployees] AS [PlantEmployees]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Plants" EntityType="Self.Plants" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Plants].[id] AS [id], 
+    [Plants].[name] AS [name], 
+    [Plants].[description] AS [description], 
+    [Plants].[area] AS [area]
+    FROM [dbo].[Plants] AS [Plants]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ScrapDetails" EntityType="Self.ScrapDetails" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ScrapDetails].[id] AS [id], 
+    [ScrapDetails].[scrapId] AS [scrapId], 
+    [ScrapDetails].[reasonId] AS [reasonId], 
+    [ScrapDetails].[machineId] AS [machineId], 
+    [ScrapDetails].[quantity] AS [quantity], 
+    [ScrapDetails].[weight] AS [weight], 
+    [ScrapDetails].[cost] AS [cost], 
+    [ScrapDetails].[employeeNumber] AS [employeeNumber]
+    FROM [dbo].[ScrapDetails] AS [ScrapDetails]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ScrapReasons" EntityType="Self.ScrapReasons" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ScrapReasons].[id] AS [id], 
+    [ScrapReasons].[description] AS [description], 
+    [ScrapReasons].[operationId] AS [operationId]
+    FROM [dbo].[ScrapReasons] AS [ScrapReasons]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Scraps" EntityType="Self.Scraps" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Scraps].[id] AS [id], 
+    [Scraps].[date] AS [date], 
+    [Scraps].[partId] AS [partId], 
+    [Scraps].[departmentId] AS [departmentId], 
+    [Scraps].[plantId] AS [plantId], 
+    [Scraps].[machineId] AS [machineId], 
+    [Scraps].[operationId] AS [operationId], 
+    [Scraps].[unitCost] AS [unitCost], 
+    [Scraps].[unitWeight] AS [unitWeight], 
+    [Scraps].[cancelled] AS [cancelled]
+    FROM [dbo].[Scraps] AS [Scraps]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Stackpole20190326094907_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="current" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="current" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="emailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Machine">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="departmentId" />
+            <PropertyRef Name="plantId" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="departmentId" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="plantId" Type="Int32" Nullable="false" />
+          <Property Name="stamp" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OpDept">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="partDeptID" Type="Int32" />
+          <Property Name="operationID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="OperationMachine">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="operationID" />
+            <PropertyRef Name="machineID" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="operationID" Type="Int32" Nullable="false" />
+          <Property Name="machineID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Operation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OpScrapReason">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="operationID" Type="Int32" />
+          <Property Name="scrapReasonID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PartCustomer">
+          <Key>
+            <PropertyRef Name="PartCustID" />
+            <PropertyRef Name="PartID" />
+            <PropertyRef Name="CustID" />
+          </Key>
+          <Property Name="PartCustID" Type="Int32" Nullable="false" />
+          <Property Name="PartID" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PartDepartment">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="cost" />
+            <PropertyRef Name="weightlbs" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="partID" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="deptID" Type="Int32" />
+          <Property Name="sequence" Type="Int32" />
+          <Property Name="cost" Type="Double" Nullable="false" />
+          <Property Name="weightlbs" Type="Double" Nullable="false" />
+          <Property Name="area" Type="Int32" />
+          <Property Name="dateCost" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Part">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="reportScrap" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="reportScrap" Type="Boolean" Nullable="false" />
+          <Property Name="PlantNumber" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PlantEmployee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="employeeId" Type="Int32" />
+          <Property Name="plantId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Plant">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="area" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ScrapDetail">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="scrapId" />
+            <PropertyRef Name="reasonId" />
+            <PropertyRef Name="machineId" />
+            <PropertyRef Name="quantity" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="scrapId" Type="Int32" Nullable="false" />
+          <Property Name="reasonId" Type="Int32" Nullable="false" />
+          <Property Name="machineId" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="weight" Type="Double" />
+          <Property Name="cost" Type="Double" />
+          <Property Name="employeeNumber" Type="Int16" />
+        </EntityType>
+        <EntityType Name="ScrapReason">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="operationId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Scrap">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="partId" />
+            <PropertyRef Name="departmentId" />
+            <PropertyRef Name="plantId" />
+            <PropertyRef Name="operationId" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="partId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="departmentId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="plantId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="machineId" Type="Int32" />
+          <Property Name="operationId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="unitCost" Type="Double" />
+          <Property Name="unitWeight" Type="Double" />
+          <Property Name="cancelled" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="Stackpole20190326094907_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="Machines" EntityType="Self.Machine" />
+          <EntitySet Name="OpDepts" EntityType="Self.OpDept" />
+          <EntitySet Name="OperationMachines" EntityType="Self.OperationMachine" />
+          <EntitySet Name="Operations" EntityType="Self.Operation" />
+          <EntitySet Name="OpScrapReasons" EntityType="Self.OpScrapReason" />
+          <EntitySet Name="PartCustomers" EntityType="Self.PartCustomer" />
+          <EntitySet Name="PartDepartments" EntityType="Self.PartDepartment" />
+          <EntitySet Name="Parts" EntityType="Self.Part" />
+          <EntitySet Name="PlantEmployees" EntityType="Self.PlantEmployee" />
+          <EntitySet Name="Plants" EntityType="Self.Plant" />
+          <EntitySet Name="ScrapDetails" EntityType="Self.ScrapDetail" />
+          <EntitySet Name="ScrapReasons" EntityType="Self.ScrapReason" />
+          <EntitySet Name="Scraps" EntityType="Self.Scrap" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Stackpole20190326094907_dbModelStoreContainer" CdmEntityContainer="Stackpole20190326094907_dbEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="Stackpole20190326094907_dbModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="current" ColumnName="current" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="Stackpole20190326094907_dbModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="state" ColumnName="state" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="Stackpole20190326094907_dbModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="emailAddress" ColumnName="emailAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="Stackpole20190326094907_dbModel.Location">
+              <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Machines">
+            <EntityTypeMapping TypeName="Stackpole20190326094907_dbModel.Machine">
+              <MappingFragment StoreEntitySet="Machines">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="departmentId" ColumnName="departmentId" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="plantId" ColumnName="plantId" />
+                <ScalarProperty Name="stamp" ColumnName="stamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OpDepts">
+            <EntityTypeMapping TypeName="Stackpole20190326094907_dbModel.OpDept">
+              <MappingFragment StoreEntitySet="OpDept">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="partDeptID" ColumnName="partDeptID" />
+                <ScalarProperty Name="operationID" ColumnName="operationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OperationMachines">
+            <EntityTypeMapping TypeName="Stackpole20190326094907_dbModel.OperationMachine">
+              <MappingFragment StoreEntitySet="OperationMachines">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="operationID" ColumnName="operationID" />
+                <ScalarProperty Name="machineID" ColumnName="machineID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Operations">
+            <EntityTypeMapping TypeName="Stackpole20190326094907_dbModel.Operation">
+              <MappingFragment StoreEntitySet="Operations">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OpScrapReasons">
+            <EntityTypeMapping TypeName="Stackpole20190326094907_dbModel.OpScrapReason">
+              <MappingFragment StoreEntitySet="OpScrapReasons">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="operationID" ColumnName="operationID" />
+                <ScalarProperty Name="scrapReasonID" ColumnName="scrapReasonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartCustomers">
+            <EntityTypeMapping TypeName="Stackpole20190326094907_dbModel.PartCustomer">
+              <MappingFragment StoreEntitySet="PartCustomers">
+                <ScalarProperty Name="PartCustID" ColumnName="PartCustID" />
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartDepartments">
+            <EntityTypeMapping TypeName="Stackpole20190326094907_dbModel.PartDepartment">
+              <MappingFragment StoreEntitySet="PartDepartments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="partID" ColumnName="partID" />
+                <ScalarProperty Name="deptID" ColumnName="deptID" />
+                <ScalarProperty Name="sequence" ColumnName="sequence" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="weightlbs" ColumnName="weightlbs" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="dateCost" ColumnName="dateCost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parts">
+            <EntityTypeMapping TypeName="Stackpole20190326094907_dbModel.Part">
+              <MappingFragment StoreEntitySet="Parts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="reportScrap" ColumnName="reportScrap" />
+                <ScalarProperty Name="PlantNumber" ColumnName="PlantNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlantEmployees">
+            <EntityTypeMapping TypeName="Stackpole20190326094907_dbModel.PlantEmployee">
+              <MappingFragment StoreEntitySet="PlantEmployees">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="plantId" ColumnName="plantId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plants">
+            <EntityTypeMapping TypeName="Stackpole20190326094907_dbModel.Plant">
+              <MappingFragment StoreEntitySet="Plants">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="area" ColumnName="area" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScrapDetails">
+            <EntityTypeMapping TypeName="Stackpole20190326094907_dbModel.ScrapDetail">
+              <MappingFragment StoreEntitySet="ScrapDetails">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="scrapId" ColumnName="scrapId" />
+                <ScalarProperty Name="reasonId" ColumnName="reasonId" />
+                <ScalarProperty Name="machineId" ColumnName="machineId" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="employeeNumber" ColumnName="employeeNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScrapReasons">
+            <EntityTypeMapping TypeName="Stackpole20190326094907_dbModel.ScrapReason">
+              <MappingFragment StoreEntitySet="ScrapReasons">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="operationId" ColumnName="operationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scraps">
+            <EntityTypeMapping TypeName="Stackpole20190326094907_dbModel.Scrap">
+              <MappingFragment StoreEntitySet="Scraps">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="partId" ColumnName="partId" />
+                <ScalarProperty Name="departmentId" ColumnName="departmentId" />
+                <ScalarProperty Name="plantId" ColumnName="plantId" />
+                <ScalarProperty Name="machineId" ColumnName="machineId" />
+                <ScalarProperty Name="operationId" ColumnName="operationId" />
+                <ScalarProperty Name="unitCost" ColumnName="unitCost" />
+                <ScalarProperty Name="unitWeight" ColumnName="unitWeight" />
+                <ScalarProperty Name="cancelled" ColumnName="cancelled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
